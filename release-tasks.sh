@@ -1,1 +1,1 @@
-python app/__init__.py
+release: python app/__init__.py
