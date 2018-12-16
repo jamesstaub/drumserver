@@ -83,4 +83,4 @@ def api(request):
       response.update({'ancestor_tree': ancestor_tree})
     return json.dumps(response)
 
-# run("localhost", 8080)
+run()
