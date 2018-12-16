@@ -4,7 +4,6 @@ import json
 import os
 from urllib.parse import unquote
 
-
 """
 TODO:
   convert all files to mp3
@@ -84,4 +83,4 @@ def api(request):
       response.update({'ancestor_tree': ancestor_tree})
     return json.dumps(response)
 
-run("localhost", 80)
+run("localhost", 8080)
