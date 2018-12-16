@@ -33,20 +33,21 @@ def create_path_response(path):
   files = [c for c in contents if '.' in c]
   audio = [f for f in files if f.split('.')[1] in audio_extensions]
   images = [f for f in files if f.split('.')[1] in img_extensions]
+  
+  if path[-1] != '/':
+    path = f"{path}/"
 
   response = {
-    "content": {
-      "dirs": dirs,
-      "audio": audio,
-      "img": images[0] if images else None,
-      "path": path,
-    }
+    "dirs": dirs,
+    "audio": audio,
+    "img": images[0] if images else None,
+    "path": path,
   }
 
   # included to easily highlight the selected item
   # in each direcotry in the UI
   if path.split('/'):
-     response['content']['currentSelection'] = path.split('/')[-1]
+     response['currentSelection'] = path.split('/')[-1]
 
   return response
 
@@ -63,12 +64,11 @@ def api(request):
     request.setHeader('Access-Control-Allow-Origin', '*')
     
     path = unquote(request.path.decode('utf-8'))
-    # path = request.path.decode('utf-8')
 
     response = create_path_response(path)
     # add nested directory tree to response for audio file
     # so front end can display all parent directories
-    if len(response['content']['audio']):
+    if len(response['audio']):
       path_dirs = path.split('/')
       ancestor_tree = []
       current_path = ''
@@ -81,9 +81,7 @@ def api(request):
         current_path = next_path
         ancestor_tree.append(create_path_response(next_path))
 
-      response['content'].update({'ancestor_tree': ancestor_tree})
-
-
+      response.update({'ancestor_tree': ancestor_tree})
     return json.dumps(response)
 
 run("localhost", 8080)
