@@ -83,6 +83,8 @@ def api(request):
       response.update({'ancestor_tree': ancestor_tree})
     return json.dumps(response)
 
+
 # run("localhost", 8080)
-port = int(os.environ.get("PORT", 8080))
-run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+  port = int(os.environ.get("PORT", 8080))
+  run(host='0.0.0.0', port=port)
