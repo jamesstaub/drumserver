@@ -1,1 +1,2 @@
-release: python app/__init__.py
+chmod 755 app/
+python app/__init__.py
