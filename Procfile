@@ -1,1 +1,1 @@
-web: python app/__init__.py --log-file -
+web: gunicorn drumserver.wsgi --log-file -
