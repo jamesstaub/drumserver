@@ -6,10 +6,13 @@ this app uses python `os` to traverse the directories but the files in this repo
 The purpose is solely to provide a folder navigation UI, not to actaully serve the audio files.
 
 
+
+
 ## Running Locally
 
 Make sure you have Python 3.7 [installed locally](http://install.python-guide.org). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
+Create an environment
 ```sh
 $ python3 -m venv env
 $ pip install -r requirements.txt
@@ -20,6 +23,12 @@ $ python manage.py migrate
 $ python manage.py collectstatic
 
 $ heroku local
+```
+
+or activate existing environment
+sh
+```
+virtualenv env
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
