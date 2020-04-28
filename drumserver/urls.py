@@ -16,7 +16,16 @@ import api.views
 
 urlpatterns = [
 
+    re_path(r'^search/*', api.views.search, name="search"),
     re_path(r'^', api.views.index, name="drumserver"),
     
     # path("admin/", admin.site.urls),
 ]
+
+
+
+# urlpatterns = [
+#     re_path(r'^index/$', api.views.index, name='index'),
+#     re_path(r'^bio/(?P<username>\w+)/$', views.bio, name='bio'),
+#     re_path(r'^weblog/', include('blog.urls')),
+# ]

@@ -22,7 +22,8 @@ $ createdb drumserver
 $ python manage.py migrate
 $ python manage.py collectstatic
 
-$ heroku local
+python manage.py runserver
+
 ```
 
 or activate existing environment
