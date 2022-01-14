@@ -22,7 +22,7 @@ $ createdb drumserver
 $ python manage.py migrate
 $ python manage.py collectstatic
 
-python manage.py runserver
+python3 manage.py runserver
 
 ```
 

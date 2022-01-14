@@ -67,8 +67,9 @@ def index(request):
 
 def paginate_results(result_list, page):
   page_size = 20
-  page_multiply = page - 1 # assume client is sending pages with 1 index , should be 0 index
-  results = result_list[page_multiply*page_size:page_multiply*page_size+page_size]
+  start = page * page_size
+  end = start + page_size
+  results = result_list[start:end]
   last_page = math.ceil(len(result_list) / page_size)
   return { "results": results, "page": page, "last_page": last_page }
 

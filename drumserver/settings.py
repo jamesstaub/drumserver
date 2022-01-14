@@ -27,11 +27,11 @@ SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # SECURITY WARNING: don't run with CORS_ORIGIN_ALLOW_ALL turned on in production!
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
-CORS_ORIGIN_WHITELIST = ('http://localhost:4200', 'https://euclidean-cracked.firebaseapp.com')
+CORS_ORIGIN_WHITELIST = ('https://localhost:4200', 'https://euclidean-cracked.firebaseapp.com', 'https://euclip.app')
 CORS_ALLOW_METHODS = (
     'POST',
     'OPTIONS'
