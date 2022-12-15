@@ -21,7 +21,7 @@ def create_path_response(path):
   dirs = [c for c in contents if not '.' in c]
   files = [c for c in contents if '.' in c]
   audio = [f for f in files if f.split('.')[1] in audio_extensions]
-  images = [f for f in files if f.split('.')[1] in img_extensions]
+  images = [f'{path}/{f}' for f in files if f.split('.')[1] in img_extensions]
 
   if path[-1] != '/':
     path = f"{path}/"
@@ -32,11 +32,6 @@ def create_path_response(path):
     "img": images[0] if images else None,
     "path": path,
   }
-  # included to easily highlight the selected item
-  # in each direcotry in the UI
-  if path.split('/'):
-    response['currentSelection'] = path.split('/')[-1]
-
   return response
 
 
@@ -59,6 +54,13 @@ def index(request):
       next_path = f"{current_path}/{p}"
       current_path = next_path
       ancestor_tree.append(create_path_response(next_path))
+
+    for idx, ansc in enumerate(ancestor_tree):
+      # currentSelection to easily highlight the selected item
+      # in each direcotry in the UI
+      next_path = idx + 1
+      if next_path < len(ancestor_tree):
+        ansc["currentSelection"] = os.path.basename(os.path.normpath(ancestor_tree[next_path]["path"]))
 
     response.update({'ancestor_tree': ancestor_tree})
 
