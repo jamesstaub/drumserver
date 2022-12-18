@@ -82,8 +82,9 @@ def search(request):
   page = request.GET.get('page')
   page = int(page) if page else 1
   # include_dir = request.GET['include_dir']
-
+  
   results = []
+  
   for root, dirs, files in os.walk('./static'):
     for filename in files:
       if root.startswith('./static'):
@@ -98,4 +99,30 @@ def search(request):
       if re_file_search and filename.endswith(".mp3"):
         results.append(filepath)
   
-  return JsonResponse(paginate_results(results, page))
+  return JsonResponse(paginate_results(group_search_results(results), page))
+
+
+def group_search_results(results):
+  list_of_path_segments = [{"segs": [s for s in r.split('/') if len(s)], "path": r} for r in results]
+  
+  grouped_results = {}
+
+  for seg in list_of_path_segments:
+    filename = seg['segs'].pop()
+    key = " / ".join(seg['segs'])
+  
+    if not key in grouped_results:
+      grouped_results[key] = []
+  
+    grouped_results[key].append({
+      'filename': filename.split('.')[0],
+      'path': seg['path']
+    })
+  
+  
+  grouped_results_list = [{"folder": k} for k in  [*grouped_results.keys()]]
+  for idx, val in enumerate([*grouped_results.values()]):
+    grouped_results_list[idx]["files"] = val
+
+
+  return grouped_results_list
