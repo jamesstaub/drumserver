@@ -84,7 +84,9 @@ def search(request):
   # include_dir = request.GET['include_dir']
   
   results = []
-  
+  # TODO:
+  # better searching by breaking the query up by spaces, recursively search the tree, filtering it 
+  # by each word in search query
   for root, dirs, files in os.walk('./static'):
     for filename in files:
       if root.startswith('./static'):
@@ -99,7 +101,8 @@ def search(request):
       if re_file_search and filename.endswith(".mp3"):
         results.append(filepath)
   
-  return JsonResponse(paginate_results(group_search_results(results), page))
+  # return JsonResponse(paginate_results(group_search_results(results), page))
+  return JsonResponse({"results":group_search_results(results)})
 
 
 def group_search_results(results):
